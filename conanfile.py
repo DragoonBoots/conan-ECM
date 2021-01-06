@@ -5,12 +5,15 @@ from conans import CMake, ConanFile, tools
 
 class QtBreezeIconsConan(ConanFile):
     name = 'ECM'
-    version = os.getenv('UPSTREAM_VERSION', '5.77.0')
+    kde_stable_version = '5.77.0'
     license = 'LGPL-2.1-only'
     description = 'Conan recipe for KDE Extra CMake Modules'
     url = 'https://github.com/DragoonBoots/conan-ECM'
     topics = ["CMake"]
     no_copy_source = True
+
+    def set_version(self):
+        self.version = os.getenv('UPSTREAM_VERSION', self.kde_stable_version)
 
     def source(self):
         git = tools.Git()
