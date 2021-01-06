@@ -22,7 +22,6 @@ jobs:
           - 5.44.0
           - 5.36.0
     env:
-      UPSTREAM_VERSION: ${{matrix.version}}
       CONAN_USERNAME: dragoonboots
       CONAN_REPO: ECM
       CONAN_CHANNEL: testing
@@ -30,6 +29,8 @@ jobs:
       CONAN_UPLOAD: https://api.bintray.com/conan/dragoonboots/conan-packages
     steps:
       - uses: actions/checkout@v2
+      - name: Set version
+        run: echo "${{matrix.version}}" > version.txt
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
