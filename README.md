@@ -7,7 +7,7 @@ Available versions correspond to the Qt releases:
 
 | Qt   | Use version |
 | ---- | ----------- |
-| 5.14 | 5.78.0-rc1  |
+| 5.14 | 5.81        |
 | 5.13 | 5.77        |
 | 5.12 | 5.76        |
 | 5.11 | 5.65        |

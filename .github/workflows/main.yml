@@ -13,7 +13,7 @@ jobs:
       matrix:
         include:
           - qt_version: 5.14.2
-            version: 5.78.0-rc1
+            version: 5.81.0
           - qt_version: 5.13.2
             version: 5.77.0
           - qt_version: 5.12.9
@@ -25,10 +25,12 @@ jobs:
           - qt_version: 5.9.9
             version: 5.54.0
     env:
+      CONAN_LOGIN_USERNAME: ${{secrets.CONAN_LOGIN_USERNAME}}
       CONAN_USERNAME: dragoonboots
       CONAN_REPO: ECM
+      CONAN_CHANNEL: testing
       CONAN_PASSWORD: ${{secrets.CONAN_KEY}}
-      CONAN_UPLOAD: https://api.bintray.com/conan/dragoonboots/conan-packages
+      CONAN_UPLOAD: ${{secrets.CONAN_UPLOAD}}
     steps:
       - name: Set channel (stable)
         if: ${{github.ref == 'refs/heads/master'}}
@@ -49,5 +51,5 @@ jobs:
           pip install conan_package_tools requests
       - name: Build Conan package
         run: python build.py
-      - name: Set package version metadata
-        run: 'python update_repo_metadata.py --username="${CONAN_USERNAME}" --password-env-var="CONAN_PASSWORD" --package="${CONAN_REPO}" --version="${{matrix.version}}" --channel="${CONAN_CHANNEL}" "{\"desc\": \"ECM for Qt >= ${{matrix.qt_version}}\"}"'
+#      - name: Set package version metadata
+#        run: 'python update_repo_metadata.py --username="${CONAN_USERNAME}" --password-env-var="CONAN_PASSWORD" --package="${CONAN_REPO}" --version="${{matrix.version}}" --channel="${CONAN_CHANNEL}" "{\"desc\": \"ECM for Qt >= ${{matrix.qt_version}}\"}"'
